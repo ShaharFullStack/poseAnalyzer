@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaPipe Gesture Recognition Logger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app-container">
+        <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="header">
+            <h1 class="app-title">Gesture Recognition Logger</h1>
+            <p class="app-subtitle">Detect face, hand, and body gestures in real-time</p>
+        </div>
+        
+        <div class="controls">
+            <button id="start-camera" class="btn btn-primary">
+                <i class="fas fa-video"></i> Start Camera
+            </button>
+            <button id="stop-camera" class="btn btn-danger" disabled>
+                <i class="fas fa-video-slash"></i> Stop Camera
+            </button>
+            <button id="toggle-face" class="btn btn-inactive">
+                <i class="fas fa-face-smile"></i> Face: OFF
+            </button>
+            <button id="toggle-hands" class="btn btn-inactive">
+                <i class="fas fa-hand"></i> Hands: OFF
+            </button>
+            <button id="toggle-pose" class="btn btn-inactive">
+                <i class="fas fa-person"></i> Pose: OFF
+            </button>
+        </div>
+        
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-indicator inactive-indicator" id="camera-status"></span>
+                <span>Camera</span>
+            </div>
+            <div class="status-item">
+                <span class="status-indicator inactive-indicator" id="face-status"></span>
+                <span>Face</span>
+            </div>
+            <div class="status-item">
+                <span class="status-indicator inactive-indicator" id="hands-status"></span>
+                <span>Hands</span>
+            </div>
+            <div class="status-item">
+                <span class="status-indicator inactive-indicator" id="pose-status"></span>
+                <span>Pose</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="card video-container">
+                <video id="output-video" playsinline></video>
+                <div class="canvas-container">
+                    <canvas id="output-canvas"></canvas>
+                </div>
+            </div>
+            
+            <div class="card log-container">
+                <div class="log-header">
+                    <h2 class="log-title">
+                        <i class="fas fa-list-ul"></i> Gesture Log
+                    </h2>
+                    <div class="log-actions">
+                        <button id="clear-log" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                        <button id="copy-log" class="btn btn-warning">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+                <div id="log-content" class="log-content"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="copy-notification" id="copy-notification">
+        <i class="fas fa-check-circle"></i> Log copied to clipboard!
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="js/config.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/detectors.js"></script>
+    <script src="js/gestureRecognition.js"></script>
+    <script src="js/logger.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
